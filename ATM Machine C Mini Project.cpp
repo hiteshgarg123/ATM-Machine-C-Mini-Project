@@ -4,8 +4,8 @@ unsigned long AccountBalance = 5000;
 int temp = 0;
 
 int Withdraw();
-int Deposite();
-int BalanceEnquiry();
+int Deposit();
+int BalanceInquiry();
 int MoneyTransfer();
 int CarryTransaction();
 
@@ -15,8 +15,8 @@ int MainMenu()
 	
 	printf("*********** Welcome to ITS ATM Machine ***********\n\n");
 	printf("1. WITHDRAW\n");
-	printf("2. DEPOSITE\n");
-	printf("3. Balance ENQUIRY\n");
+	printf("2. DEPOSIT\n");
+	printf("3. BALANCE INQUIRY\n");
 	printf("4. MONEY TRANSFER\n\n");
 	printf("***************************************************\n\n");
 	
@@ -27,9 +27,9 @@ int MainMenu()
 	{
 		case 1: Withdraw();
 		        break;
-		case 2: Deposite();
+		case 2: Deposit();
 		        break;
-		case 3: BalanceEnquiry();
+		case 3: BalanceInquiry();
 		        break;
 		case 4: MoneyTransfer();
 	            break;
@@ -82,12 +82,12 @@ int Withdraw()
 	
 }
 
-int Deposite()
+int Deposit()
 {
 	
 }
 
-int BalanceEnquiry()
+int BalanceInquiry()
 {
 	
 }
