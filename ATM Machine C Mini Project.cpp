@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 unsigned long AccountBalance = 50000; 
-int i=0;
+int i=0,j=0,k=0,l=0;
 
 int Withdraw();
 int Deposit();
@@ -112,7 +112,7 @@ int BalanceInquiry()
 	}
 	
 	else if(temp2==2)
-	MainMenu();
+	exit(0);
 	
 	else
 	{
@@ -130,8 +130,84 @@ int BalanceInquiry()
 
 int MoneyTransfer()
 {
+	int TransferAmount=0,temp3=0,temp4=0;
+	SecurityCheck();
+	printf("Enter the amount you want to transfer\n");
+	scanf("%d", &TransferAmount);
+	if(TransferAmount>250000)
+	{
+		printf("You cannot transfer more than 50,000\n");
+		CarryTransaction();
+	}
+	else if(TransferAmount>AccountBalance)
+	{
+		printf("Insufficient Account Balance");
+		CarryTransaction();
+	}
+	else
+	{
+		printf("Are you sure you want to transfer %d amount", TransferAmount);
+		printf("<1>. YES \n<2>. NO\n");
+		scanf("%d",&temp3);
+		if(temp3==1)
+		{
+			printf("%d Amount has been Succesfully Transferred\n",TransferAmount);
+			printf("Do you want the recipt?\n");
+			printf("<1>. YES \n<2>. NO	 \n");
+			scanf("%d",&temp4);
+			if(temp4==1)
+			{
+				printf("Please collect the recipt\n\n");
+				CarryTransaction();
+			}
+			
+			else if(temp4==2)
+			{
+				printf("Thank you for saving paper\n");
+				CarryTransaction();
+			}
+			
+			else
+			{
+				j++;
+				while(j!=3)
+				{
+					printf("\nYou have made a wrong choice , Please try again\n\n ");
+					BalanceInquiry();	
+				}
+		
+				if(j==3)
+				exit(0);
+		    }
+
+		}
+		else if(temp3==2)
+		{
+			
+			printf("Transaction Cancelled\n\n");
+			printf("*** THANKYOU FOR USING ATM ***");
+			exit(0);
+			
+		}
+			
+		else
+		{
+			k++;
+			while(k!=3)
+			{
+				printf("\nYou have made a wrong choice , Please try again\n\n ");
+				BalanceInquiry();	
+			}
+		
+			if(k==3)
+			exit(0);
+		}
 	
+		printf("Current balance is %d", AccountBalance);
+			
+	}
 }
+
 
 int CarryTransaction()
 {
@@ -150,8 +226,15 @@ int CarryTransaction()
 	
 	else
 	{
-		printf(" Wrong Choice , Please try again");
-		CarryTransaction();
+		l++;
+		while(l!=3)
+		{
+			printf("\nYou have made a wrong choice , Please try again\n\n ");
+			BalanceInquiry();	
+		}
+		
+		if(l==3)
+		exit(0);
 	}	  
 }	
 
