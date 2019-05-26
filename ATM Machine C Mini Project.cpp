@@ -18,14 +18,15 @@ int MainMenu()
 	//Main menu starts from here
 	int choice; 
 	
-	printf("***************** WELCOME TO ITS ATM *******************\n");
-	printf("*                                                      *\n");
-	printf("*              <1>. WITHDRAW MONEY                     *\n");
-	printf("*              <2>. DEPOSIT MONEY                      *\n");
-	printf("*              <3>. BALANCE ENQUIRY                    *\n");
-	printf("*              <4>. MONEY TRANSFER                     *\n");
-	printf("*                                                      *\n");
-	printf("********************************************************\n\n");
+	printf("\n\n");
+	printf("\t\t***************** WELCOME TO ITS ATM *******************\n");
+	printf("\t\t*                                                      *\n");
+	printf("\t\t*              <1>. WITHDRAW MONEY                     *\n");
+	printf("\t\t*              <2>. DEPOSIT MONEY                      *\n");
+	printf("\t\t*              <3>. BALANCE ENQUIRY                    *\n");
+	printf("\t\t*              <4>. MONEY TRANSFER                     *\n");
+	printf("\t\t*                                                      *\n");
+	printf("\t\t********************************************************\n\n");
 	
 	printf("\nEnter your choice\n");
 	scanf("%d", &choice);
@@ -137,13 +138,13 @@ int Deposit()
 			}
 			else if(temp1==2)
 			{
-				printf("Thankyou for saving paper\n\n")
+				printf("Thankyou for saving paper\n\n");
 				printf("**** THANK YOU FOR USING ATM ****\n");
 		        exit(0);
 			}
 			else
 			{
-				g=1;
+				b=1;
 				EnhancedSecurity();
 			}
 		}
