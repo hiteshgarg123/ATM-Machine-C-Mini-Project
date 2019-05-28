@@ -1,17 +1,21 @@
+//ATM Machine C Mini Project
+
 #include<stdio.h>
 #include<stdlib.h>
+
+// All Global variables are declared here.
 
 unsigned long AccountBalance = 50000; 
 int a=0,b=0,c=0,d=0,e=0,Chance=0;
 
-int MainMenu();
-int Withdraw();
-int Deposit();
-int BalanceInquiry();
-int MoneyTransfer();
-int CarryTransaction();
-int SecurityCheck();
-int EnhancedSecurity();
+int MainMenu();            // Main Menu of ATM
+int Withdraw();            // Withdraw function
+int Deposit();             // Deposite Function
+int BalanceInquiry();      // Balance Inquiry Function
+int MoneyTransfer();       // Money Transfer Function
+int CarryTransaction();    // This function will ask user for another transaction
+int SecurityCheck();       // This function will ask for card and PIN
+int EnhancedSecurity();    // This will take care of users who will select other options than provided ones only.
 
 int MainMenu()
 {
@@ -66,7 +70,7 @@ int Withdraw()
 		if(WithdrawalAmount>(AccountBalance)) 
 		{
 		
-			printf("\nYou do not have sufficient acccount balance\n\n");
+			printf("\nCan't Withdraw %d Rupee\n\n",WithdrawalAmount);
 			CarryTransaction();
 		}
 	
@@ -127,6 +131,7 @@ int Deposit()
 		else
 		{
 			//Update the balance and eject the recipt 
+			
 			AccountBalance += DepositAmount;
 			printf("Balance has been updated \nDo you want the recipt ?\n");
 			printf("\n<1>. YES \n<2>. NO\n");
@@ -165,6 +170,8 @@ int Deposit()
 
 int BalanceInquiry()
 {
+	//Balance Inquiry function starts from here.
+	
 	SecurityCheck();
 	int temp2;
 	printf("Do you want to check the current balance of your account ?\n");
@@ -173,6 +180,8 @@ int BalanceInquiry()
 	
 	if(temp2==1)
 	{
+		//prints the current account balance.
+		
 		printf("%lu\n", AccountBalance);
 		CarryTransaction();
 	}
@@ -189,17 +198,23 @@ int BalanceInquiry()
 
 int MoneyTransfer()
 {
+	//Money Transfer Function starts from here.
+	
 	int TransferAmount=0,temp3=0,temp4=0;
 	SecurityCheck();
 	printf("Enter the amount you want to transfer\n");
 	scanf("%d", &TransferAmount);
 	if(TransferAmount>250000)
 	{
+		// Daily limit of transferring amount as per Reserve Bank of India.
+		
 		printf("You cannot transfer more than 2,50,000\n");
 		CarryTransaction();
 	}
 	else if(TransferAmount>AccountBalance)
 	{
+		// Condition of Insufficient Balance.
+		
 		printf("Insufficient Account Balance");
 		CarryTransaction();
 	}
@@ -255,6 +270,7 @@ int MoneyTransfer()
 int CarryTransaction()
 {
 	//function to carry out another transaction after one.
+	
 	int temp=0;
 	printf("Do you want to carry another transacation ?\n ");
 	printf("Press \n 1.- Yes \n 2.- No \n");
@@ -276,6 +292,8 @@ int CarryTransaction()
 
 int SecurityCheck()
 {
+	// Function to ask PIN and card
+	
 	int i=0;
 	while(i<3)
 	{
@@ -299,6 +317,8 @@ int SecurityCheck()
 
 int EnhancedSecurity()
 {
+	// The function will take care of users who will press other choice than provided ones.
+	
 	Chance++;
 	while(Chance!=3)
 	{
