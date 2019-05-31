@@ -2,6 +2,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 // All Global variables are declared here.
 
@@ -16,6 +17,7 @@ int MoneyTransfer();       // Money Transfer Function
 int CarryTransaction();    // This function will ask user for another transaction
 int SecurityCheck();       // This function will ask for card and PIN
 int EnhancedSecurity();    // This will take care of users who will select other options than provided ones only.
+int CardVerification();
 
 int MainMenu()
 {
@@ -349,8 +351,60 @@ int EnhancedSecurity()
 	
 }
 
+
+int CardVerification()
+{
+struct employee
+{
+    char name[50] ;
+	char AccountNumber[50];
+    int pin;
+    float balance;
+}emp;
+ 
+	FILE *fp;
+    struct employee s;
+    char temp[50];
+    int pin=0;
+    
+    fp = fopen("person.dat", "rb");
+ 
+    if(fp == NULL)
+    {
+        printf("Error opening file\n");
+        exit(1);
+    }
+ 
+    printf("Enter your account number");
+    fflush(stdin);
+    gets(temp);
+    
+   while( fread(&s, sizeof(struct employee), 1, fp) == 1 )
+    {
+		if(strcmp(temp , s.AccountNumber)==0)
+		{
+			flag==1
+			printf("\nWelcome %s\n",s.name);
+			printf("\nPlease enter your PIN\n");
+			scanf("%d",&pin);
+			
+			if(pin==s.pin)
+			{
+				MainMenu();
+			}
+			
+			else
+			printf("Wrong pin , Please try again");
+		}
+		
+	}
+  
+    fclose(fp);
+}
+
+
 int main()
 {
-	MainMenu();
+	CardVerification();
 	return 0;
 }
