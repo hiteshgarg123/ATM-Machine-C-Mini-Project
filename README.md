@@ -24,6 +24,11 @@ You can download from the given link.
 https://sourceforge.net/projects/orwelldevcpp/
 ```
 
+## Some more information 
+
+The details in file are stored in binary form for more security .
+Modifying binary files is slightly different than text file so handle them carefully.
+
 ## Contributors
 
 * Hitesh Garg .
