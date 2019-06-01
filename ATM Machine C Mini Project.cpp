@@ -6,8 +6,17 @@
 
 // All Global variables are declared here.
 
-unsigned long AccountBalance = 50000; 
 int a=0,b=0,c=0,d=0,e=0,Chance=0;
+
+struct AccountHolder
+{
+    char name[50] ;
+	char AccountNumber[50];
+    int pin;
+    float balance;
+};
+struct AccountHolder s;
+
 
 int MainMenu();            // Main Menu of ATM
 int Withdraw();            // Withdraw function
@@ -56,7 +65,6 @@ int Withdraw()
 {
 	//Withdraw function starts from here.
 	
-	SecurityCheck();
 	int WithdrawalAmount,temp5=0;			
 	printf("\nEnter amount to be withdrawn\n");
 	scanf("%d" , &WithdrawalAmount);
@@ -69,7 +77,8 @@ int Withdraw()
 	
 	if(temp5==1)
 	{
-		if(WithdrawalAmount>(AccountBalance)) 
+		
+		if(WithdrawalAmount>(s.balance)) 
 		{
 		
 			printf("\nCan't Withdraw %d Rupee\n\n",WithdrawalAmount);
@@ -85,9 +94,16 @@ int Withdraw()
 		{
 		//Eject the cash and Update the account balance
 	
-		AccountBalance = AccountBalance - WithdrawalAmount;
+		FILE *fp;
+		fp=fopen("Account_Details.dat","wb+");
+		
+		s.balance -= WithdrawalAmount;
+		fwrite(&s,sizeof(struct AccountHolder),1,fp);
+		
+		fclose(fp);
+		
 		printf("\n\n*** Please collect the cash ***\n\n");
-		printf("Current account balance is %lu \n\n", AccountBalance);
+		printf("Current account balance is %.2f \n\n", s.balance);
 		CarryTransaction();
 	
 		}
@@ -111,7 +127,6 @@ int Deposit()
 {
 	//Deposit function starts from here.
 	
-	SecurityCheck();
 	int DepositAmount , temp1 , temp6=0;
 	printf("\nEnter the amount to be deposited\n");
 	scanf("%d", &DepositAmount);
@@ -122,7 +137,7 @@ int Deposit()
 	So max amount that can be deposited or withdrawn is 20,000. */
 	
 	printf("Are you sure , you want to deposit %d amount ?\n", DepositAmount);
-	printf("<1>. YES\n <2>. NO\n");
+	printf("<1>. YES\n<2>. NO\n");
 	scanf("%d", &temp6);
 	
 	if(temp6==1)
@@ -133,8 +148,16 @@ int Deposit()
 		else
 		{
 			//Update the balance and eject the recipt 
+			 
+			FILE *fp;
+			fopen("Account_Details.dat","wb+");
 			
-			AccountBalance += DepositAmount;
+			s.balance += DepositAmount;
+			fwrite(&s,sizeof(struct AccountHolder),1,fp);
+			
+			
+			fclose(fp);
+
 			printf("Balance has been updated \nDo you want the recipt ?\n");
 			printf("\n<1>. YES \n<2>. NO\n");
 			scanf("%d", &temp1);
@@ -174,7 +197,6 @@ int BalanceInquiry()
 {
 	//Balance Inquiry function starts from here.
 	
-	SecurityCheck();
 	int temp2;
 	printf("Do you want to check the current balance of your account ?\n");
 	printf("<1>. YES \n<2>. NO\n");
@@ -184,12 +206,20 @@ int BalanceInquiry()
 	{
 		//prints the current account balance.
 		
-		printf("%lu\n", AccountBalance);
+		FILE *fp;
+		fopen("Account_Details.dat","rb");
+		
+		printf("%.2f\n", s.balance);
 		CarryTransaction();
+		
+		fclose(fp);
 	}
 	
 	else if(temp2==2)
-	exit(0);
+	{
+		printf("**** THANK YOU FOR USING ATM ****\n");
+		exit(0);
+	}
 	 
 	else
 	{
@@ -203,21 +233,21 @@ int MoneyTransfer()
 	//Money Transfer Function starts from here.
 	
 	int TransferAmount=0,temp3=0,temp4=0;
-	SecurityCheck();
+	
 	printf("Enter the amount you want to transfer\n");
 	scanf("%d", &TransferAmount);
-	if(TransferAmount>250000)
+	if(TransferAmount>250000) 
 	{
 		// Daily limit of transferring amount as per Reserve Bank of India.
 		
 		printf("You cannot transfer more than 2,50,000\n");
 		CarryTransaction();
 	}
-	else if(TransferAmount>AccountBalance)
+	else if(TransferAmount>s.balance)
 	{
 		// Condition of Insufficient Balance.
 		
-		printf("Insufficient Account Balance");
+		printf("Can''t transfer money\n");
 		CarryTransaction();
 	}
 	else
@@ -233,7 +263,7 @@ int MoneyTransfer()
 			scanf("%d",&temp4);
 			if(temp4==1)
 			{
-				printf("Please collect the recipt\n\n");
+				printf("Please collect the recipt\n\n"); 
 				CarryTransaction();
 			}
 			
@@ -263,7 +293,7 @@ int MoneyTransfer()
 			EnhancedSecurity();
 		}
 	
-		printf("Current balance is %d", AccountBalance);
+		printf("Current balance is %fz", s.balance);
 			
 	}
 }
@@ -280,6 +310,7 @@ int CarryTransaction()
 	if(temp == 1)
 	{
 		system("CLS");
+		SecurityCheck();
 		MainMenu();
 	}
 	else if(temp == 2)
@@ -302,9 +333,9 @@ int SecurityCheck()
 		int SecretePIN = 0 , attempt=1;
 		printf("Enter your PIN Number\n");
 		scanf("%d", &SecretePIN);
-		if(SecretePIN == 1992)
-
+		if(SecretePIN == s.pin)
 		break;
+		
 		else
         {
 			printf("Incorrect PIN, Please try again\n\n");
@@ -354,20 +385,12 @@ int EnhancedSecurity()
 
 int CardVerification()
 {
-struct employee
-{
-    char name[50] ;
-	char AccountNumber[50];
-    int pin;
-    float balance;
-}emp;
- 
+
 	FILE *fp;
-    struct employee s;
     char temp[50];
-    int pin=0;
+    int pin=0 , flag=0 , count=0;
     
-    fp = fopen("person.dat", "rb");
+    fp = fopen("Account_Details.dat", "rb");
  
     if(fp == NULL)
     {
@@ -375,31 +398,53 @@ struct employee
         exit(1);
     }
  
-    printf("Enter your account number");
+    FILE *ftemp;
+	ftemp = fopen("temp.dat","wb+");
+     
+	printf("Enter your account number");
     fflush(stdin);
     gets(temp);
     
-   while( fread(&s, sizeof(struct employee), 1, fp) == 1 )
+    
+    while( fread(&s, sizeof(struct AccountHolder), 1, fp) == 1 )
     {
 		if(strcmp(temp , s.AccountNumber)==0)
 		{
-			flag==1
+			flag=1;
 			printf("\nWelcome %s\n",s.name);
+			
+			PINMenu:
 			printf("\nPlease enter your PIN\n");
 			scanf("%d",&pin);
 			
 			if(pin==s.pin)
 			{
 				MainMenu();
+				fwrite(&s,sizeof(struct AccountHolder),1,ftemp);  
 			}
 			
 			else
-			printf("Wrong pin , Please try again");
+			{
+				printf("Wrong pin , Please try again\n");
+				count++;
+				while(count!=3)
+				goto PINMenu;
+				
+			}
 		}
 		
+		else
+		fwrite(&s,sizeof(struct AccountHolder),1,ftemp);
+	}
+
+
+	if(flag==0)
+	{
+		printf("Please enter a valid card number\n");
 	}
   
-    fclose(fp);
+    fclose(ftemp);
+	fclose(fp);
 }
 
 
