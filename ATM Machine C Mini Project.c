@@ -244,7 +244,7 @@ int MoneyTransfer()
 	}
 	else
 	{
-		printf("Are you sure you want to transfer %d amount", TransferAmount);
+		printf("Are you sure you want to transfer %d amount\n", TransferAmount);
 		printf("<1>. YES \n<2>. NO\n");
 		scanf("%d",&temp3);
 		if(temp3==1)
@@ -399,20 +399,21 @@ int CardVerification()
 			if(pin==s.pin)
 			{
 				MainMenu();  
+				fwrite(&s,sizeof(struct AccountHolder),1,ftemp);
 			}
 			
 			else
 			{
 				printf("Wrong pin , Please try again\n");
 				count++;
-				while(count!=3)
-				goto PINMenu;
+				if(count!=3)
+					goto PINMenu;
+				else
+					fwrite(&s,sizeof(struct AccountHolder),1,ftemp);
 			}
-			fwrite(&s,sizeof(struct AccountHolder),1,ftemp);
 		}
-		
 		else
-		fwrite(&s,sizeof(struct AccountHolder),1,ftemp);
+			fwrite(&s,sizeof(struct AccountHolder),1,ftemp);
 	}
 	
 	if(flag==0)
