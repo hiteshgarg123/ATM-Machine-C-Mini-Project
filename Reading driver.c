@@ -10,12 +10,16 @@ struct AccountHolder
     int pin;
     float balance;
 };
+
+//hitesh 40
+// vaibhav 40
+// hrithik 80
  
 int main()
 {
     FILE *fp;
     struct AccountHolder s;
-	fp = fopen("person.dat", "r");
+	fp = fopen("Account_Details.dat", "rb");
  
     if(fp == NULL)
     {
