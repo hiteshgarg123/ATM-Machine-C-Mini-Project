@@ -10,10 +10,6 @@ struct AccountHolder
     int pin;
     float balance;
 };
-
-//hitesh 40
-// vaibhav 40
-// hrithik 80
  
 int main()
 {
