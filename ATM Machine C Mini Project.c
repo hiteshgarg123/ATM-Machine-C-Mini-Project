@@ -1,14 +1,23 @@
- //ATM Machine C Mini Project
+//ATM Machine C Mini Project
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>  
 
-// All Global variables are declared here.
+/**************************************** All Global variables are declared here *********************************************************/
 
 int a=0,b=0,c=0,d=0,Chance=0,tempo=0; 
 
 FILE *fp,*ftemp;
+
+/*****************************************************************************************************************************************/
+
+/************************************* Structure to store the details of Active user *****************************************************/
+
+/* Here we define an active user as a user, who is currently doing a transaction in ATM 
+It means a user who entered his/her Account number and PIN CORRECT , His/Her details got verified with the help of this structure and 
+later stored in this , and as soon as he/she completes the transaction , the structure will also update his/her account details.
+*/
 
 struct AccountHolder
 {
@@ -19,15 +28,21 @@ struct AccountHolder
 };
 struct AccountHolder s,r;
 
-int MainMenu();            // Main Menu of ATM
-int Withdraw();            // Withdraw function
-int Deposit();             // Deposite Function
-int BalanceInquiry();      // Balance Inquiry Function
-int MoneyTransfer();       // Money Transfer Function
-int SecurityCheck();       // This function will ask for card and PIN
-int EnhancedSecurity();    // This will take care of users who will select other options than provided ones only.
-int CardVerification();
-void update_file(struct AccountHolder);
+/*******************************************************************************************************************************************/
+
+/********************************************* FUNCTION PROTOTYPES *************************************************************************/
+
+int MainMenu();           				    // Main Menu of ATM
+int Withdraw();            					// Withdraw function
+int Deposit();            					// Deposite Function
+int BalanceInquiry();      					// Balance Inquiry Function
+int MoneyTransfer();       					// Money Transfer Function
+int SecurityCheck();       					// This function will ask for card and PIN
+int EnhancedSecurity();    					// This will take care of users who will select other options than provided ones only.
+int CardVerification();    					//This function will verify the card credentials entered by the user
+void update_file(struct AccountHolder);     //This will update the bank records of Account Holder after  Transaction.
+
+/******************************************************************************************************************************************/
 
 void update_file(struct AccountHolder a){
 
