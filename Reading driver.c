@@ -1,7 +1,9 @@
-//This program will read details from that binary file and display in readable form.
+/******* This program will read the details from Account_Details.dat file and display the credentials in readable form. **********/
 
 #include<stdio.h>
 #include<stdlib.h>
+
+/******************* Structure to store details of all Account Holders present in Account_Details.dat file *******************/
 
 struct AccountHolder
 {
