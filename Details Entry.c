@@ -1,4 +1,4 @@
-//This program is to enter new records 
+/******************* New records can be added in Account_Details.dat file using this program ********************/
 
 #include<stdio.h>
 #include<string.h>
