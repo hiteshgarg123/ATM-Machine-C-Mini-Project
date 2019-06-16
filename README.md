@@ -40,8 +40,9 @@ Refer to code in main program for more information.
 
 **Account_Details.dat** : This file contains records of all the account holders.
  
-*The details in file are stored in binary form for more security .
-*Modifying binary files is slightly different than text files so handle them carefully.
+*The details in file are stored in binary form for more security.*
+ 
+*Modifying binary files is slightly different than text files so handle them carefully.*
 
 ## Contributors
 
