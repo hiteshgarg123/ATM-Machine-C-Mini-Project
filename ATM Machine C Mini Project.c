@@ -6,7 +6,8 @@
 
 /**************************************** All Global variables are declared here *********************************************************/
 
-int a=0,b=0,c=0,d=0,Chance=0,tempo=0; 
+int a=0,b=0,c=0,d=0,Chance=0;
+int tempfix=0; 
 
 FILE *fp,*ftemp;
 
@@ -39,8 +40,8 @@ int BalanceInquiry();      					// Balance Inquiry Function
 int MoneyTransfer();       					// Money Transfer Function
 int SecurityCheck();       					// This function will ask for card and PIN
 int EnhancedSecurity();    					// This will take care of users who will select other options than provided ones only.
-int CardVerification();    					//This function will verify the card credentials entered by the user
-void update_file(struct AccountHolder);     //This will update the bank records of Account Holder after  Transaction.
+int CardVerification();    					// This function will verify the card credentials entered by the user
+void update_file(struct AccountHolder);     // This will update the bank records of Account Holder after  Transaction.
 
 /******************************************************************************************************************************************/
 
@@ -63,10 +64,9 @@ void update_file(struct AccountHolder a){
     fclose(temp);
 	remove("Account_Details.dat");
     int error = rename("temp.dat","Account_Details.dat");
-    if(error)
-    	printf("\n\nFile Update failed with error code %d\n", error);
-	else
-		tempo=1;
+    
+	if(error)
+    tempfix=1;
 }
 
 int MainMenu()
@@ -112,7 +112,7 @@ int Withdraw()
 	
 	//if account balance is not sufficient to withdraw the entered amount
 
-	printf("Are you sure want to withdraw %d amount?\n ", WithdrawalAmount);
+	printf("Are you sure want to withdraw %d Rupee ?\n ", WithdrawalAmount);
 	printf("<1>. YES\n <2>. NO\n");
 	scanf("%d", &temp5);
 	
@@ -136,7 +136,7 @@ int Withdraw()
 			
 			update_file(s);
 			
-			if(tempo==1)
+			if(tempfix==1)
 			{
 				printf("\nTransaction Failed\n");
 			}
@@ -193,7 +193,7 @@ int Deposit()
 			s.balance += DepositAmount;
 			update_file(s);
 			
-			if(tempo==1)
+			if(tempfix==1)
 			{
 				printf("\nTransaction Failed\n");
 			}
@@ -313,8 +313,9 @@ int MoneyTransfer()
 				update_file(r);
 				update_file(s);
 
-				if(tempo==1)
+				if(tempfix==1)
 				{
+					printf("Hitesh\n");
 					printf("\nTransaction Failed\n");
 				}
 				else
@@ -342,7 +343,7 @@ int MoneyTransfer()
 			
 			else
 			{
-				printf("\nAccount not found !\n");
+				printf("\nTransaction Failed !\n");
 			}
 		}
 		else if(temp3==2)
