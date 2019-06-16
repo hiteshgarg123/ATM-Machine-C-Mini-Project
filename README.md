@@ -26,7 +26,7 @@ https://sourceforge.net/projects/orwelldevcpp/
 
 ## Some more information 
 
-**Some information about files**
+**Information about files**
 
 **ATM Machine C Mini Project.c** : This is the main file where all the code and functionality of program is present.
 
@@ -34,18 +34,18 @@ https://sourceforge.net/projects/orwelldevcpp/
 
 **Details Entry.c** : This file is for making new users/Account holders in "Account_Details.dat" file.
 
-**temp.dat** : This is an empty dummy file , Basically you don't need to download it , This file will aytomatically get created ones you executed the main program ( ATM Machine C Mini Project.c) and will also get deleted after the program is ended .
+**temp.dat** : This is an empty dummy file , Basically you don't need to download it , This file will automatically get created ones you execute the main program ( ATM Machine C Mini Project.c) and will also get deleted after the program is ended .
 Use of this file is to provide a two file system , that is used to store the details of modified account along with all other accounts and after that , it gets renamed to "Account_Details.dat"
-Refer to code in main code for more information.
+Refer to code in main program for more information.
 
 **Account_Details.dat** : This file contains records of all the account holders.
  
 *The details in file are stored in binary form for more security .
-*Modifying binary files is slightly different than text file so handle them carefully.
+*Modifying binary files is slightly different than text files so handle them carefully.
 
 ## Contributors
 
-* <a href="hts:H//github.com/hiteshgarg123//">Hitesh Garg</a> 
+* <a href="https://github.com/hiteshgarg123/">Hitesh Garg</a> 
 * <a href="https://github.com/vaibhav2vicky/">Vaibhav Yadav</a>
 * <a href="https://github.com/hrithik8084/">Hrithik Singh</a>
 
