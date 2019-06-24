@@ -4,9 +4,9 @@
 #include<string.h>
 #include<stdlib.h>
 
-struct employee
+struct AccountHolder
 {
-    char name[50] , temp[512];
+    char name[50];
     char AccountNumber[50];
     int pin;
     float balance;
@@ -15,7 +15,7 @@ struct employee
 int main()
 {
     FILE *fp;
-    struct employee s;
+    struct AccountHolder s;
     fp = fopen("person.dat", "ab");
  
     if(fp == NULL)
@@ -35,7 +35,7 @@ int main()
     printf("Enter Balance :\n");
     scanf("%f",&s.balance);
     
-    fwrite(&s,sizeof(struct employee),1,fp);
+    fwrite(&s,sizeof(struct AccountHolder),1,fp);
     
     fclose(fp);
     
