@@ -48,5 +48,5 @@ Refer to code in main program for more information.
 
 * <a href="https://github.com/hiteshgarg123/">Hitesh Garg</a> 
 * <a href="https://github.com/vaibhav2vicky/">Vaibhav Yadav</a>
-* <a href="https://github.com/hrithik8084/">Hrithik Singh</a>
+* <a href="https://github.com/hrithik73/">Hrithik Singh</a>
 
