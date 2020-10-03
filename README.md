@@ -44,6 +44,16 @@ Refer to code in main program for more information.
  
 *Modifying binary files is slightly different than text files so handle them carefully.*
 
+# In Python:
+
+## Refer this README for more about the Project in Python
+ 
+
+
+## About:
+This is Completly open-source project anyone can contribute to this Project
+
+
 ## Contributors
 
 * <a href="https://github.com/hiteshgarg123/">Hitesh Garg</a> 
